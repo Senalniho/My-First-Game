@@ -2,16 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic Tetris</title>
-    <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
-    <link rel="stylesheet" type="text/css" href="styles1.css" />
+    <title>Tetris Game</title>
+    <link rel="stylesheet" href="./src/css/index.css" />
   </head>
   <body>
-    <h3>Score: <span id="score">0</span></h3>
-    <button id="start-button">Start / Pause</button>
-
-    <!-- <script src="./game.js"></script> -->
-    <script src="./game1.js"></script>
+    <div id="header">
+      <h2>Score : 0</h2>
+    </div>
+    <div id="tetris-container">
+      <button id="start-button">Start</button>
+      <button id="pause-button">Pause</button>
+      <canvas id="tetris" height="600" width="300"></canvas>
+      <canvas id="next-piece" height="120" width="120"></canvas>
+    </div>
+    <script src="./src/js/index.js"></script>
+    <footer>
+      <!-- <h2>Created with love</h2> -->
+    </footer>
   </body>
 </html>
