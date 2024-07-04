@@ -316,6 +316,7 @@ class TetrisGame {
 
   handleKeyPress(e) {
     let key = e.key;
+    e.preventDefault();
     if (key == "ArrowDown") {
       this.moveDown();
     } else if (key == "ArrowLeft") {
