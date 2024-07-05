@@ -1,11 +1,12 @@
 class Piece {
   constructor(shape, colorIndex) {
-    this.shape = shape;
+    this.shape = shape; //This is a 2D array that represents the shape of the piece.
     this.colorIndex = colorIndex;
-    this.x = 4;
+    this.x = 4; // These are the initial coordinates of the piece, set to 4 and 0, respectively.
     this.y = 0;
   }
 
+  //The rotate method rotates the shape of the piece by 90 degrees clockwise.
   rotate() {
     let rotatedPiece = [];
     for (let i = 0; i < this.shape.length; i++) {
@@ -17,10 +18,12 @@ class Piece {
     for (let i = 0; i < this.shape.length; i++) {
       for (let j = 0; j < this.shape[i].length; j++) {
         rotatedPiece[i][j] = this.shape[j][i];
+        // To swap the row and column indices to create a transposed matrix.
       }
     }
     for (let i = 0; i < rotatedPiece.length; i++) {
       rotatedPiece[i] = rotatedPiece[i].reverse();
+      // To achieve a 90-degree clockwise rotation
     }
     return rotatedPiece;
   }
@@ -33,8 +36,10 @@ class Grid {
     this.grid = this.generateGrid();
   }
 
+  // This method creates a 2D array with the specified number of rows
+  //and columns, and initializes all elements to 0.
   generateGrid() {
-    let grid = [];
+    let grid = []; // 2D array to represent the gird
     for (let i = 0; i < this.rows; i++) {
       grid.push([]);
       for (let j = 0; j < this.cols; j++) {
@@ -44,6 +49,7 @@ class Grid {
     return grid;
   }
 
+  //This method checks for full rows in the grid and removes them
   checkGrid() {
     let count = 0;
     for (let i = 0; i < this.grid.length; i++) {
@@ -55,8 +61,8 @@ class Grid {
       }
       if (allFilled) {
         count++;
-        this.grid.splice(i, 1);
-        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+        this.grid.splice(i, 1); // remove the row from the grid
+        this.grid.unshift([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]); // adds the new row
       }
     }
     return count;
@@ -66,22 +72,25 @@ class Grid {
     for (let i = 0; i < piece.shape.length; i++) {
       for (let j = 0; j < piece.shape[i].length; j++) {
         if (piece.shape[i][j] == 1) {
-          let p = x + j;
+          // checks is the piece array is filled or not
+          let p = x + j; // p & q calculate absolute coordinates of the cell in grid
           let q = y + i;
           if (p >= 0 && p < this.cols && q >= 0 && q < this.rows) {
+            // check boundary conditions
             if (this.grid[q][p] > 0) {
-              return true;
+              return true; // collision with boundary
             }
           } else {
-            return true;
+            return true; //collision with existing piece
           }
         }
       }
     }
-    return false;
+    return false; //// no collision
   }
 }
 
+// This manages the game state, handle user input, and render the game board.
 class TetrisGame {
   constructor() {
     this.canvas = document.querySelector("#tetris");
@@ -194,6 +203,8 @@ class TetrisGame {
     }
   }
 
+  //Updates the game state by checking for full rows,
+  // updating the score, and moving the current piece down
   newGameState() {
     if (!this.isPaused) {
       let count = this.grid.checkGrid();
@@ -224,6 +235,7 @@ class TetrisGame {
     }
   }
 
+  // renders the piece by add the color
   renderPiece() {
     let piece = this.piece.shape;
     for (let i = 0; i < piece.length; i++) {
@@ -236,6 +248,7 @@ class TetrisGame {
     }
   }
 
+  // renders next piece with the color
   renderNextPiece() {
     this.nextCtx.clearRect(
       0,
